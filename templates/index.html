@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIET Bootcamp by AIKARYASHALA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="max-w-4xl mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">KIET Bootcamp by AIKARYASHALA</h1>
+        
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
+            <div class="bg-gray-50 border-b p-4 flex justify-between items-center text-sm text-gray-500 font-medium">
+                <span>Student Feedback List</span>
+                <span>Page {{ page }} of {{ total_pages }}</span>
+            </div>
+
+            <div class="divide-y divide-gray-100">
+                {% for student in students %}
+                <div class="flex items-center p-4 hover:bg-blue-50 transition cursor-pointer group">
+                    <img src="{{ url_for('static', filename=student[3]) }}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-gray-200 group-hover:border-blue-400">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-gray-900 truncate">{{ student[0] }}</h3>
+                            <span class="text-xs text-gray-400">{{ student[1] }}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 truncate">{{ student[2] }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="p-4 bg-gray-50 border-t flex justify-center space-x-4">
+                {% if page > 1 %}
+                <a href="/?page={{ page - 1 }}" class="px-6 py-2 bg-white border rounded shadow-sm text-sm font-medium hover:bg-gray-100">Previous</a>
+                {% endif %}
+                
+                {% if page < total_pages %}
+                <a href="/?page={{ page + 1 }}" class="px-6 py-2 bg-blue-600 text-white rounded shadow-sm text-sm font-medium hover:bg-blue-700">Next Page &gt;</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
