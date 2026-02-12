@@ -9,7 +9,8 @@ def clean_and_prepare_data(file_path):
     column_mapping = {
         'Full Name': 'name',
         'Roll Number': 'rollno',
-        'Your overall experience with the Bootcamp. ( minimum 2 sentences)': 'feedback'
+        'Your overall experience with the Bootcamp. ( minimum 2 sentences)': 'feedback',
+        'Overall Bootcamp Experience': 'rating'
     }
     df = df[list(column_mapping.keys())].rename(columns=column_mapping)
 

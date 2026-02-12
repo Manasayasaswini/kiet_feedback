@@ -18,7 +18,7 @@ def index():
     cur = conn.cursor()
 
     # Fetch records for current page
-    cur.execute('SELECT name, rollno, feedback, img FROM students ORDER BY id LIMIT %s OFFSET %s', (per_page, offset))
+    cur.execute('SELECT name, rollno, feedback, img, rating FROM students ORDER BY id LIMIT %s OFFSET %s', (per_page, offset))
     students = cur.fetchall()
 
     # Get total count for pagination

@@ -18,7 +18,7 @@
 
             <div class="divide-y divide-gray-100">
                 {% for student in students %}
-                <div class="flex items-center p-4 hover:bg-blue-50 transition cursor-pointer group">
+<!--	<div class="flex items-center p-4 hover:bg-blue-50 transition cursor-pointer group">
                     <img src="{{ url_for('static', filename=student[3]) }}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-gray-200 group-hover:border-blue-400">
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-center">
@@ -26,20 +26,52 @@
                             <span class="text-xs text-gray-400">{{ student[1] }}</span>
                         </div>
                         <p class="text-sm text-gray-600 truncate">{{ student[2] }}</p>
-                    </div>
-                </div>
-                {% endfor %}
+			 <p class="text-xs text-yellow-600 font-medium">Rating: {{ student[4] }}</p>
+		    </div> -->
+		
+		<div class="p-6 border-b hover:bg-blue-50 transition">
+		    <div class="flex items-center mb-3">
+       			 <img src="{{ url_for('static', filename=student[3]) }}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'" class="w-14 h-14 rounded-full object-cover mr-4 border-2 border-gray-200">
+       		    <div>
+           	    <h3 class="text-lg font-semibold text-gray-900">{{ student[0] }}</h3>
+           	    <span class="text-sm text-gray-500">{{ student[1] }}</span>
+   	            </div>
+	            </div>
+		    <p class="text-xl font-medium text-gray-900 leading-relaxed mb-3 bg-gray-50 p-3 rounded">
+     	                {{ student[2]|lower|capitalize }}
+		    </p>
+		    <p class="text-sm text-yellow-600 font-medium">
+    		        Rating: {{ student[4] }}
+		    </p>
+		</div>
+		{% endfor %}
+               
             </div>
-
+            <!--
             <div class="p-4 bg-gray-50 border-t flex justify-center space-x-4">
-                {% if page > 1 %}
+           
+		{% if page > 1 %}
                 <a href="/?page={{ page - 1 }}" class="px-6 py-2 bg-white border rounded shadow-sm text-sm font-medium hover:bg-gray-100">Previous</a>
                 {% endif %}
                 
                 {% if page < total_pages %}
                 <a href="/?page={{ page + 1 }}" class="px-6 py-2 bg-blue-600 text-white rounded shadow-sm text-sm font-medium hover:bg-blue-700">Next Page &gt;</a>
-                {% endif %}
-            </div>
+		{% endif %} 
+		-->
+		<div class="p-4 bg-gray-50 border-t flex justify-center space-x-4">
+		    {% if page > 1 %}
+  	             <a href="{{ url_for('index', page=page-1) }}" class="px-6 py-2 bg-white border rounded shadow-sm text-sm font-medium hover:bg-gray-100">Previous</a>
+  		    {% endif %}
+
+   		    {% if page < total_pages %}
+		    <a href="{{ url_for('index', page=page+1) }}" class="px-6 py-2 bg-blue-600 text-white rounded shadow-sm text-sm font-medium hover:bg-blue-700">Next Page &gt;</a>
+		    {% endif %}
+
+		    <form action="{{ url_for('index') }}" method="get" class="ml-4 flex items-center space-x-2">
+		        <input type="number" name="page" min="1" max="{{ total_pages }}" class="w-16 px-2 py-1 border rounded" placeholder="Page">
+		        <button type="submit" class="px-4 py-1 bg-gray-200 rounded hover:bg-gray-300">Go</button>
+		    </form>
+		</div>
         </div>
     </div>
 </body>
