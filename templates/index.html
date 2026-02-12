@@ -3,76 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIET Bootcamp by AIKARYASHALA</title>
+    <title>KIET Bootcamp Feedback</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
-    <div class="max-w-4xl mx-auto py-10 px-4">
-        <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">KIET Bootcamp by AIKARYASHALA</h1>
+<body class="bg-[#0f172a] min-h-screen text-white selection:bg-white selection:text-indigo-600">
+
+    <div class="max-w-7xl mx-auto py-16 px-6">
         
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
-            <div class="bg-gray-50 border-b p-4 flex justify-between items-center text-sm text-gray-500 font-medium">
-                <span>Student Feedback List</span>
-                <span>Page {{ page }} of {{ total_pages }}</span>
-            </div>
-
-            <div class="divide-y divide-gray-100">
-                {% for student in students %}
-<!--	<div class="flex items-center p-4 hover:bg-blue-50 transition cursor-pointer group">
-                    <img src="{{ url_for('static', filename=student[3]) }}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-gray-200 group-hover:border-blue-400">
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-sm font-bold text-gray-900 truncate">{{ student[0] }}</h3>
-                            <span class="text-xs text-gray-400">{{ student[1] }}</span>
-                        </div>
-                        <p class="text-sm text-gray-600 truncate">{{ student[2] }}</p>
-			 <p class="text-xs text-yellow-600 font-medium">Rating: {{ student[4] }}</p>
-		    </div> -->
-		
-		<div class="p-6 border-b hover:bg-blue-50 transition">
-		    <div class="flex items-center mb-3">
-       			 <img src="{{ url_for('static', filename=student[3]) }}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'" class="w-14 h-14 rounded-full object-cover mr-4 border-2 border-gray-200">
-       		    <div>
-           	    <h3 class="text-lg font-semibold text-gray-900">{{ student[0] }}</h3>
-           	    <span class="text-sm text-gray-500">{{ student[1] }}</span>
-   	            </div>
-	            </div>
-		    <p class="text-xl font-medium text-gray-900 leading-relaxed mb-3 bg-gray-50 p-3 rounded">
-     	                {{ student[2]|lower|capitalize }}
-		    </p>
-		    <p class="text-sm text-yellow-600 font-medium">
-    		        Rating: {{ student[4] }}
-		    </p>
-		</div>
-		{% endfor %}
-               
-            </div>
-            <!--
-            <div class="p-4 bg-gray-50 border-t flex justify-center space-x-4">
-           
-		{% if page > 1 %}
-                <a href="/?page={{ page - 1 }}" class="px-6 py-2 bg-white border rounded shadow-sm text-sm font-medium hover:bg-gray-100">Previous</a>
-                {% endif %}
-                
-                {% if page < total_pages %}
-                <a href="/?page={{ page + 1 }}" class="px-6 py-2 bg-blue-600 text-white rounded shadow-sm text-sm font-medium hover:bg-blue-700">Next Page &gt;</a>
-		{% endif %} 
-		-->
-		<div class="p-4 bg-gray-50 border-t flex justify-center space-x-4">
-		    {% if page > 1 %}
-  	             <a href="{{ url_for('index', page=page-1) }}" class="px-6 py-2 bg-white border rounded shadow-sm text-sm font-medium hover:bg-gray-100">Previous</a>
-  		    {% endif %}
-
-   		    {% if page < total_pages %}
-		    <a href="{{ url_for('index', page=page+1) }}" class="px-6 py-2 bg-blue-600 text-white rounded shadow-sm text-sm font-medium hover:bg-blue-700">Next Page &gt;</a>
-		    {% endif %}
-
-		    <form action="{{ url_for('index') }}" method="get" class="ml-4 flex items-center space-x-2">
-		        <input type="number" name="page" min="1" max="{{ total_pages }}" class="w-16 px-2 py-1 border rounded" placeholder="Page">
-		        <button type="submit" class="px-4 py-1 bg-gray-200 rounded hover:bg-gray-300">Go</button>
-		    </form>
-		</div>
+        <div class="text-center mb-16">
+            <h1 class="text-5xl font-serif italic text-white mb-2 tracking-wide">
+                Student <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Experiences</span>
+            </h1>
+            <p class="text-slate-400 text-sm font-bold uppercase tracking-[0.2em]">KIET Bootcamp • Aikaryashala</p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {% for student in students %}
+            
+                {% set color_idx = loop.index0 % 3 %}
+
+                {% if color_idx == 0 %}
+                    {% set card_bg = "bg-gradient-to-br from-[#6366f1] to-[#8b5cf6]" %} {% set badge_bg = "bg-white/20" %}
+                {% elif color_idx == 1 %}
+                    {% set card_bg = "bg-gradient-to-br from-[#0d9488] to-[#059669]" %} {% set badge_bg = "bg-black/20" %}
+                {% else %}
+                    {% set card_bg = "bg-gradient-to-br from-[#e11d48] to-[#c026d3]" %} {% set badge_bg = "bg-white/20" %}
+                {% endif %}
+
+                <div class="{{ card_bg }} rounded-[2rem] p-8 shadow-2xl transform transition duration-500 hover:-translate-y-2 hover:shadow-indigo-500/20 flex flex-col justify-between h-full relative overflow-hidden">
+                    
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 blur-3xl rounded-full pointer-events-none"></div>
+
+                    <div class="flex justify-between items-start mb-6 relative z-10">
+                        <div class="p-1 bg-white/20 rounded-full backdrop-blur-sm">
+                            <img src="{{ url_for('static', filename=student[3]) }}"
+                                 onerror="this.src='https://ui-avatars.com/api/?name={{ student[0] }}&background=random'"
+                                 class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md">
+                        </div>
+
+                        
+                        <div class="{{ badge_bg }} backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 shadow-sm">
+                            <span class="text-[10px] font-bold tracking-widest uppercase text-white">
+                                {% if student[4]|int == 5 %}
+                                    ★ Top Rated
+                                {% else %}
+                                    Verified
+                                {% endif %}
+                            </span>
+                        </div>
+		    </div>
+
+                    <div class="mb-8 relative z-10 flex-grow">
+                        <p class="text-2xl font-serif italic leading-relaxed text-white drop-shadow-sm">
+                            "{{ student[2]|capitalize }}"
+                        </p>
+                    </div>
+
+                    <div class="h-px w-full bg-white/20 mb-6"></div>
+
+                    <div class="flex justify-between items-end relative z-10">
+                        <div>
+                            <h3 class="text-lg font-bold text-white tracking-wide">{{ student[0] }}</h3>
+                            <p class="text-xs text-white/70 font-mono mt-1">{{ student[1] }}</p>
+                        </div>
+                        
+                        <div class="flex text-yellow-300 text-sm gap-1">
+                            {% for i in range(student[4]|int) %}★{% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+        </div>
+
+        <div class="mt-16 flex justify-center items-center gap-6">
+            {% if page > 1 %}
+            <a href="{{ url_for('index', page=page-1) }}" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-800 text-white hover:bg-indigo-600 transition shadow-lg border border-slate-700">
+                ←
+            </a>
+            {% endif %}
+
+            <span class="text-slate-500 font-mono text-sm">Page {{ page }} of {{ total_pages }}</span>
+
+            {% if page < total_pages %}
+            <a href="{{ url_for('index', page=page+1) }}" class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-600 text-white hover:bg-indigo-500 transition shadow-lg shadow-indigo-500/30">
+                →
+            </a>
+            {% endif %}
+        </div>
+	
+		 <!-- Go to Page Form -->
+
+            <form action="{{ url_for('index') }}" method="get" class="ml-4 flex items-center bg-slate-800/50 p-1 rounded-full border border-slate-500 backdrop-blur-sm">
+    
+                <input type="number" name="page" min="1" max="{{ total_pages }}"
+                 class="w-6 px-3 py-1.5 bg-transparent text-white text-center text-sm font-mono focus:outline-none placeholder-slate-100" placeholder="#">
+
+                <button type="submit" class="px-5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-widest rounded transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50">GO</button>
+    
+            </form>
+	
+
     </div>
 </body>
 </html>
